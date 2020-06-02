@@ -13,8 +13,23 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->enum('size', ['46', '48', '50', '52'])->default('46');
+            $table->string('url_image', 100);
+            $table->enum('status', ['published', 'unpublished'])->default('unpublished');
+            $table->enum('code', ['solde', 'new'])->default('new');
+            $table->string('reference');
+
+            // foreign key
+            $table->foreignId('category_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('SET NULL');
+
             $table->timestamps();
         });
     }
