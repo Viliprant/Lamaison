@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index')->name('home');
+Route::get('category/{id}', 'FrontController@showCategory')->name('show_category');
+Route::get('solde', 'FrontController@showSolde')->name('show_solde');
