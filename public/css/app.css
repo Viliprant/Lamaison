@@ -1,0 +1,15 @@
+.list-item-img{
+    object-fit: contain;
+}
+
+.list-item-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item-details{
+    display: flex;
+    flex-direction: column;
+    padding: 0.9rem;
+    align-self: flex-start;
+}

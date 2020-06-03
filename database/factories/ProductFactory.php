@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
     return [
-        'title' => $faker->sentence($nbWords = 7),
+        'title' => $faker->sentence($nbWords = 4),
         'description' => $faker->paragraph(),
         'price' => $faker->randomFloat(2, 0, 100), 
         'size' => $faker->randomElement(['46', '48', '50', '52']),
