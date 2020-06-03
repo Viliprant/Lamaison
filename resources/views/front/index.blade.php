@@ -19,9 +19,9 @@ Accueil
     
     <div class="col-lg-3 col-md-4 col-12">
         <div class="list-item-card">
-            <img src="{{asset('images/' . $product->url_image )}}" alt="{{$product->title}}" class="img-thumbnail list-item-img">
+            <img src="{{asset('images/' . $product->url_image )}}" alt="{{$product->title}}" class="img-thumbnail resize">
             <div class="list-item-details">
-                <p>{{$product->title}}</p>
+                <p><a href="{{route('show_product', $product->id)}}">{{$product->title}}</a></p>
                 <p>{{'Prix : ' . $product->price . ' €'}}</p>
             </div>
         </div>

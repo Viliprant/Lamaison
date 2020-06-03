@@ -13,3 +13,24 @@
     padding: 0.9rem;
     align-self: flex-start;
 }
+
+.resize{
+    height: 319px;
+}
+
+.miniature-container:first-child{
+    max-height: 20px;
+}
+
+.miniature{
+    max-height: 150px;
+}
+
+.miniature + .miniature{
+    margin-top: 0.9rem;
+}
+
+.img-show{
+    min-height: 200px;
+    max-height: 600px;
+}
