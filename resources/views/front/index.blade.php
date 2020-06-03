@@ -17,7 +17,7 @@ Accueil
 
 @forelse($products as $product)
     
-    <div class="col-lg-3 col-md-4 col-12">
+    <div class="col-lg-3 col-md-4">
         <div class="list-item-card">
             <img src="{{asset('images/' . $product->url_image )}}" alt="{{$product->title}}" class="img-thumbnail resize">
             <div class="list-item-details">

@@ -16,6 +16,14 @@ class DatabaseSeeder extends Seeder
         // Supprimer toutes les images si elles existent à la racine du dossier "images"
         Storage::disk('local')->delete( Storage::files() );
 
+        DB::table('users')->insert([
+            [
+                'name' => 'admin',
+                'email' => 'admin@admin.fr',
+                'password' => Hash::make( 'admin' )
+            ],
+        ]);
+
         DB::table('categories')->insert([
             [
                 'title' => 'Homme',
