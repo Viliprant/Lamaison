@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
+
 class ProductController extends Controller
 {
+
+    private $paginate = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('back.product.index');
+        $products = Product::with('category')->paginate($this->paginate);
+        return view('back.product.index', ['products' => $products]);
     }
 
     /**
@@ -54,9 +60,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('back.product.create');
     }
 
     /**
@@ -77,7 +83,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
         //
     }

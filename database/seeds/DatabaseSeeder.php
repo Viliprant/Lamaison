@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        factory(App\Product::class, 10)->create()->each(function($product){
+        factory(App\Product::class, 30)->create()->each(function($product){
             $categories = ['Homme', 'Femme']; // les choix possibles
             // On en choisit un aléatoirement tout en vérifiant qu'il est présent dans la table
             $category = App\Category::where('title', $categories[rand(0,1)])->first();
