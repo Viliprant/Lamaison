@@ -15,7 +15,7 @@ Accueil
 
 <div class="row align-items-baseline"> <!-- Class perso pour grid-->
 
-@forelse($products as $product)
+@foreach($products as $product)
     
     <div class="col-lg-3 col-md-4">
         <div class="list-item-card">
@@ -26,9 +26,7 @@ Accueil
             </div>
         </div>
     </div>
-
-@empty
-@endforelse
+@endforeach
 
 </div>
 

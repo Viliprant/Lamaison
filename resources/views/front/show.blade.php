@@ -20,10 +20,10 @@
     <div class="d-flex flex-row py-5">
 
         <div class="d-flex flex-column align-items-center col-sm-3">
-            <p>Autres produits :</p>
-            <img src="{{asset('images/' . $product->url_image)}}" alt="{{$product->title}}" class="img-thumbnail miniature">
-            <img src="{{asset('images/' . $product->url_image)}}" alt="{{$product->title}}" class="img-thumbnail miniature">
-            <img src="{{asset('images/' . $product->url_image)}}" alt="{{$product->title}}" class="img-thumbnail miniature">
+            <p>Produits similaires :</p>
+            @foreach ($similarProducts as $similarProduct)
+                <img src="{{asset('images/' . $similarProduct->url_image)}}" alt="{{$similarProduct->title}}" class="img-thumbnail miniature">
+            @endforeach
         </div>
 
         <div class="col-sm-6 d-flex align-items-center justify-content-center">

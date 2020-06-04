@@ -37,7 +37,9 @@ class FrontController extends Controller
 
     public function showProduct(int $id){
         $product = Product::with('category')->find($id);
-        return view('front.show', ['product' => $product]);
+        $similarProducts = Product::with('category')->where('category_id', $product->category->id)->get()->shuffle()->slice(0, 3);
+        return view('front.show',   ['product' => $product],
+                                    ['similarProducts' => $similarProducts]);
     }
     
 }

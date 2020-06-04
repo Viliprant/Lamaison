@@ -1,7 +1,3 @@
-.list-item-img{
-    object-fit: contain;
-}
-
 .list-item-card{
     display: flex;
     flex-direction: column;
@@ -16,6 +12,8 @@
 
 .resize{
     height: 319px;
+    object-position: center;
+    object-fit: contain !important;
 }
 
 .miniature-container:first-child{
@@ -34,4 +32,8 @@
     min-height: 200px;
     max-height: 600px;
     width: 100%;
+}
+img{
+    object-position: center;
+    object-fit: contain !important;
 }
