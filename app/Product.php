@@ -15,7 +15,6 @@ class Product extends Model
         'status',
         'reference',
         'code',
-        'url_image',
     ];
 
     public function category(){

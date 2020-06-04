@@ -26,10 +26,10 @@ Administration
         <tbody>
             @foreach($products as $product)
                 <tr>
-                    <td>{{$product->title}}</td>
-                    <td>{{$product->category->title}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->status}}</td>
+                    <td class="align-middle">{{$product->title}}</td>
+                    <td class="align-middle">{{$product->category->title}}</td>
+                    <td class="align-middle">{{$product->price}}</td>
+                    <td class="align-middle">{{$product->status}}</td>
                     <td><a class="nav-link" href="{{route('admin.edit', $product)}}">Mettre à jour</a></td>
                     <td><a class="nav-link" href="{{route('admin.destroy', $product)}}">Supprimer</a></td>
                 </tr>

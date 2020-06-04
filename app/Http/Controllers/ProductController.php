@@ -47,16 +47,29 @@ class ProductController extends Controller
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'category' => 'required|integer',
+            'category_id' => 'required|integer',
             'size' => 'required|in:46,48,50,52',
             'status' => 'required|in:published,draft',
             'reference' => 'required|size:13',
             'code' => 'required|in:new,solde',
-            'url_image' => 'image|max:3000',
+            'url_image' => 'required|image|max:3000',
         ]);
 
-        // Insertions des données qui sont "fillables"
+        // Insertions des données qui sont "fillables" (url_image n'est pas fillable pour la gérer après)
         $product = Product::create($request->all());
+
+        // Gestion de l'image
+        if ($request->file('url_image')) {
+
+            // enregistre dans le store l'image et en même temps on récupère le
+            // nom de l'image créé par Laravel, nom sécurisé
+            // 1. Pas d'écrasement d'image avec le même nom.
+            // 2. Pas d'injection de script dans le nom de l'image.
+            $newUrl = $request->file('url_image')->store('');
+            $product->url_image = $newUrl;
+            $product->save();
+        }
+
 
         // Message renvoyé
         return redirect()->route('admin.index')->with('message', [

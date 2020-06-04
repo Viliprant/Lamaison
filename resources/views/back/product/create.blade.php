@@ -42,9 +42,9 @@ Administration
                 </div>
 
                 <div class="form-group row">
-                    <label for="category" class="col-sm-2 col-form-label">Catégorie</label>
+                    <label for="category_id" class="col-sm-2 col-form-label">Catégorie</label>
                     <div class="col-sm-10">
-                        <select class="form-control" id="category" name="category">
+                        <select class="form-control" id="category_id" name="category_id">
                             <option value="1">Homme</option>
                             <option value="2">Femme</option>
                         </select>
@@ -72,9 +72,9 @@ Administration
                 </div>
 
                 <div class="form-group row">
-                    <label for="image" class="col-sm-2 col-form-label">Image</label>
+                    <label for="url_image" class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" id="image" name="image">
+                        <input type="file" class="form-control" id="url_image" name="url_image">
                         {{-- DISPLAY ERROR --}}
                         @error('image')
                             <span class="text-danger">{{ $message }}</span>
