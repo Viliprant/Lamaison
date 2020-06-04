@@ -20,17 +20,17 @@ class FrontController extends Controller
 
 
     public function index(){
-        $products = Product::with('category')->paginate($this->paginate);
+        $products = Product::with('category')->where('status', 'published')->paginate($this->paginate);
         return view('front.index', ['products' => $products]);
     }
 
     public function showCategory(int $id){
-        $products = Product::with('category')->where('category_id', $id)->paginate($this->paginate);
+        $products = Product::with('category')->where([['category_id', $id], ['status', 'published']])->paginate($this->paginate);
         return view('front.index', ['products' => $products]);
     }
 
     public function showSolde(){
-        $products = Product::with('category')->where('code', 'solde')->paginate($this->paginate);
+        $products = Product::with('category')->where([['code', 'solde'], ['status', 'published']])->paginate($this->paginate);
         return view('front.index', ['products' => $products]);
     }
 
