@@ -41,6 +41,28 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // dump($request->all()); die;
+
+        // Validation des champs
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'category' => 'required|integer',
+            'size' => 'required|in:46,48,50,52',
+            'status' => 'required|in:published,draft',
+            'reference' => 'required|size:13',
+            'code' => 'required|in:new,solde',
+            'url_image' => 'image|max:3000',
+        ]);
+
+        // Insertions des données qui sont "fillables"
+        $product = Product::create($request->all());
+
+        // Message renvoyé
+        return redirect()->route('admin.index')->with('message', [
+            'type' => 'alert-success',
+            'content' => 'Le produit a bien été crée.'
+        ]);
     }
 
     /**

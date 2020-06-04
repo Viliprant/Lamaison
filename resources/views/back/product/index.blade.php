@@ -6,6 +6,8 @@ Administration
 
 @section('content')
 
+    @include('back.partials.flash')
+
     <div class="d-flex justify-content-center">
         <div >{{ $products->links() }}</div>    
     </div>
