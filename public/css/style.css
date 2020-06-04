@@ -37,3 +37,14 @@ img{
     object-position: center;
     object-fit: contain !important;
 }
+
+.remove-button-style{
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+.remove-button-style:hover{
+    color: #c2303e !important;
+}

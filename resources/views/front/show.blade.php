@@ -36,6 +36,15 @@
                 <span class="d-block">{{'ref : ' . $product->reference}}</span>
                 <span class="d-block">{{$product->price . ' euros'}}</span>
             </p>
+            <div class="form-group">
+                <select class="w-100">
+                    <option disabled selected>Taille</option>
+                    <option value="46">46</option>
+                    <option value="48">48</option>
+                    <option value="50">50</option>
+                    <option value="52">52</option>
+                </select>
+            </div>
         </div>
     </div>
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Product;
 
+use Storage;
+
 class ProductController extends Controller
 {
 
@@ -40,13 +42,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // dump($request->all()); die;
-
         // Validation des champs
-        $request->validate([
+        $validator = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'price' => 'required',
+            'price' => 'required|numeric',
             'category_id' => 'required|integer',
             'size' => 'required|in:46,48,50,52',
             'status' => 'required|in:published,draft',
@@ -70,6 +70,10 @@ class ProductController extends Controller
             $product->save();
         }
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+            //return redirect()->back()->with(Input::all());
+         }
 
         // Message renvoyé
         return redirect()->route('admin.index')->with('message', [
@@ -95,9 +99,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(int $id)
     {
-        return view('back.product.create');
+        $product = Product::with('category')->find($id);
+        return view('back.product.create', ['product' => $product]);
     }
 
     /**
@@ -107,9 +112,42 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
-        //
+        // Validation des champs
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'category_id' => 'required|integer',
+            'size' => 'required|in:46,48,50,52',
+            'status' => 'required|in:published,draft',
+            'reference' => 'required|size:13',
+            'code' => 'required|in:new,solde',
+            'url_image' => 'image|max:3000', // On n'oblige pas le changement d'image
+        ]);
+
+        $product = Product::with('category')->find($id);
+
+        $product->update($request->all());
+
+        // Gestion de l'image
+        if ($request->file('url_image')) {
+
+            // On supprime physiquement l'image
+            Storage::disk('local')->delete($product->url_image);
+
+            $newUrl = $request->file('url_image')->store('');
+            $product->url_image = $newUrl;
+            $product->save();
+        }
+
+
+        // Message renvoyé
+        return redirect()->route('admin.index')->with('message', [
+            'type' => 'alert-success',
+            'content' => 'Le produit a bien été modifié.'
+        ]);
     }
 
     /**
@@ -118,8 +156,19 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(int $id)
     {
-        //
+        $product = Product::with('category')->find($id);
+
+        // On supprime physiquement l'image
+        Storage::disk('local')->delete($product->url_image);
+
+        $product->delete();
+
+        return redirect()->route('admin.index')->with('message', [
+            'type' => 'alert-success',
+            'content' => 'Le produit a bien été supprimé.'
+        ]);
+
     }
 }

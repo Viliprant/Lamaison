@@ -30,8 +30,19 @@ Administration
                     <td class="align-middle">{{$product->category->title}}</td>
                     <td class="align-middle">{{$product->price}}</td>
                     <td class="align-middle">{{$product->status}}</td>
-                    <td><a class="nav-link" href="{{route('admin.edit', $product)}}">Mettre à jour</a></td>
-                    <td><a class="nav-link" href="{{route('admin.destroy', $product)}}">Supprimer</a></td>
+                    <td><a class="nav-link" href="{{route('admin.edit', $product->id)}}">Mettre à jour</a></td>
+                    <td class="align-middle">
+                        <form class="delete" method="POST" action="{{route('admin.destroy', $product->id)}}">
+                            @method('DELETE')
+                            {{--
+                        token de sécurité qui permet de sécuriser les formulaires 
+                        si ce token n'est pas présent Laravel ne traitera pas le formulaire permet d'éviter les attaques csrf ou 
+                        attaque par formulaire 
+                        --}}
+                            @csrf
+                            <input type="submit" class="text-danger remove-button-style" value="Supprimer"/>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
 
